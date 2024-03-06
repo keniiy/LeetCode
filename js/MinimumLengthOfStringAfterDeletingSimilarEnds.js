@@ -1,27 +1,39 @@
 /**
+ * @description solution for first two edge cases not working for thrid edge case
  * @params {string} s
  * @return {number}
  */
-const minimumLength = function (s) {
+const minimumLengthOfStringAfterDeletingSimilarEnds = function (s) {
   let input = s.split("");
   let result;
 
-  if (input.length <= 1) return input.length;
-
-  if (input.length == 2 && input[0] !== input[1]) return input.length;
-
-  for (i = 0; i < input.length; i++) {
-    console.log(input[i]);
-    console.log(input.length);
-
-    
-
-
+  while (input.length > 1 && input[0] === input[input.length - 1]) {
+    input.pop();
+    input.shift();
   }
 
-  return result;
+  return input.length;
 };
 
-const input = "aabccabba";
+const input = "cabaabac";
 
-console.log(minimumLength(input));
+// console.log(minimumLengthOfStringAfterDeletingSimilarEnds(input));
+
+/**
+ * @description solution for all edge cases
+ * @params {string} s
+ * @return {number}
+ */
+const minimumLengthOfStringAfterDeletingSimilarEnds2 = function (s) {
+  let start = 0;
+  let end = s.length - 1;
+
+  while (start < end && s[start] === s[end]) {
+    start++;
+    end--;
+  }
+
+  return end - start + 1;
+};
+
+console.log(minimumLengthOfStringAfterDeletingSimilarEnds2("aabccabba"));
